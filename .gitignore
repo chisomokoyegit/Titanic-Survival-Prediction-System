@@ -49,3 +49,4 @@ Thumbs.db
 # BUT ALLOW model files
 !model/titanic_survival_model.pkl
 !*.h5
+!*.h5
