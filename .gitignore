@@ -27,11 +27,6 @@ wheels/
 instance/
 .webassets-cache
 
-# Model files (large)
-*.pkl
-*.h5
-*.joblib
-
 # Data files
 *.csv
 titanic.csv
@@ -50,3 +45,7 @@ Thumbs.db
 # Environment
 .env
 .env.local
+
+# BUT ALLOW model files
+!model/titanic_survival_model.pkl
+!*.h5

@@ -2,5 +2,5 @@ services:
   - type: web
     name: titanic-survival-predictor
     env: python
-    buildCommand: pip install -r requirements.txt
+    buildCommand: pip install -r requirements.txt && bash build.sh
     startCommand: gunicorn app:app

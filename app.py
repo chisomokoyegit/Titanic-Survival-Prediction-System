@@ -1,16 +1,26 @@
 from flask import Flask, render_template, request
 import pickle
 import numpy as np
+import os
 
 app = Flask(__name__)
 
 # Load model
 model_path = "model/titanic_survival_model.pkl"
-with open(model_path, "rb") as f:
-    data = pickle.load(f)
-    model = data["model"]
-    scaler = data["scaler"]
-    sex_encoder = data.get("sex_encoder")  # Handle backward compatibility
+model = None
+scaler = None
+sex_encoder = None
+
+try:
+    with open(model_path, "rb") as f:
+        data = pickle.load(f)
+        model = data["model"]
+        scaler = data["scaler"]
+        sex_encoder = data.get("sex_encoder")  # Handle backward compatibility
+except FileNotFoundError:
+    print(f"Warning: Model file not found at {model_path}. Please train the model first.")
+except Exception as e:
+    print(f"Error loading model: {e}")
 
 @app.route("/")
 def home():
@@ -18,6 +28,9 @@ def home():
 
 @app.route("/predict", methods=["POST"])
 def predict():
+    if not model or not scaler:
+        return render_template("index.html", prediction="Error: Model not loaded. Please train the model first.")
+    
     try:
         # get input from form
         features = [
