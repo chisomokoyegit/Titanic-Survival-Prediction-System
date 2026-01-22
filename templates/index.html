@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Titanic Survival Prediction</title>
+</head>
+<body>
+    <h1>Titanic Survival Prediction</h1>
+    <form action="/predict" method="post">
+        Pclass (1=1st, 2=2nd, 3=3rd): <input type="text" name="Pclass"><br>
+        Sex (0=Female, 1=Male): <input type="text" name="Sex"><br>
+        Age: <input type="text" name="Age"><br>
+        Fare: <input type="text" name="Fare"><br>
+        SibSp: <input type="text" name="SibSp"><br>
+        <input type="submit" value="Predict">
+    </form>
+    <h2>{{ prediction }}</h2>
+</body>
+</html>
+
